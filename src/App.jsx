@@ -2,6 +2,7 @@ import { useState } from "react";
 import { LayoutDashboard, Users, FileText, Tag, BarChart3, Wallet, Building2, TrendingUp, FileCheck, DollarSign, UserPlus, Target, Plus, Search, Phone, Mail, Edit, Trash2, Filter, Calendar, Dumbbell, Clock, Check, Download, CreditCard, ArrowUpRight, Calculator, Repeat, MapPin, ArrowLeft, ChevronRight } from "lucide-react";
 import { BarChart, Bar, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import FranqueadoApp from "./FranqueadoApp";
+import ProfessorApp from "./ProfessorApp";
 
 const T = { primary:"#00BFB3", secondary:"#808080", bg:"#F8F9FA", card:"#fff", sidebar:"#1A1D21", sidebarActive:"#2D3239", sidebarBorder:"#2D3239", border:"#E5E7EB", muted:"#F3F4F6", mutedFg:"#6B7280", fg:"#111827", fgLight:"#374151", inputBg:"#F9FAFB", green:"#10B981", greenBg:"#ECFDF5", red:"#EF4444", redBg:"#FEF2F2", yellow:"#F59E0B", yellowBg:"#FFFBEB", purple:"#8B5CF6", radius:"12px", rsm:"8px" };
 
@@ -558,6 +559,7 @@ export default function App(){
   const backFromUnit=()=>{setDU(null);sPg("unidades")};
 
   if(view==="franqueado") return <FranqueadoApp onSwitch={()=>setView("franqueadora")}/>;
+  if(view==="professor") return <ProfessorApp onSwitch={()=>setView("franqueadora")}/>;
 
   const pages={
     dashboard:<DashPage/>,
@@ -574,8 +576,9 @@ export default function App(){
   return <div style={{display:"flex",height:"100vh",fontFamily:"-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif",background:T.bg}}>
     <aside style={{width:240,backgroundColor:T.sidebar,display:"flex",flexDirection:"column",flexShrink:0}}>
       <div style={{padding:"18px 20px",borderBottom:`1px solid ${T.sidebarBorder}`}}><Logo/></div>
-      <div style={{padding:"8px 8px 0"}}>
+      <div style={{padding:"8px 8px 0",display:"flex",flexDirection:"column",gap:4}}>
         <button onClick={()=>setView("franqueado")} style={{display:"flex",alignItems:"center",gap:8,width:"100%",padding:"8px 12px",background:`${T.primary}15`,color:T.primary,border:`1px solid ${T.primary}30`,borderRadius:8,fontSize:12,fontWeight:600,cursor:"pointer",fontFamily:"inherit"}}><Building2 size={14}/>Visao Franqueado</button>
+        <button onClick={()=>setView("professor")} style={{display:"flex",alignItems:"center",gap:8,width:"100%",padding:"8px 12px",background:"#8B5CF615",color:"#8B5CF6",border:"1px solid #8B5CF630",borderRadius:8,fontSize:12,fontWeight:600,cursor:"pointer",fontFamily:"inherit"}}><Dumbbell size={14}/>Visao Professor</button>
       </div>
       <div style={{padding:"6px 0 0",fontSize:10,fontWeight:700,color:"#555",textTransform:"uppercase",letterSpacing:"0.1em",paddingLeft:20,marginTop:10,marginBottom:3}}>Franqueadora</div>
       <nav style={{flex:1,overflowY:"auto",padding:"2px 8px"}}>
