@@ -5,6 +5,7 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recha
 const T={primary:"#00BFB3",bg:"#F5F6F8",card:"#fff",sidebar:"#1A1D21",sidebarActive:"#2D3239",sidebarBorder:"#2D3239",border:"#E5E7EB",muted:"#F3F4F6",mutedFg:"#6B7280",fg:"#111827",fgLight:"#374151",green:"#10B981",greenBg:"#ECFDF5",red:"#EF4444",redBg:"#FEF2F2",yellow:"#F59E0B",yellowBg:"#FFFBEB",purple:"#8B5CF6",rsm:"10px"};
 const tc={Slim:T.primary,Free:T.yellow,Circuito:T.purple};
 const DAYS=["Seg","Ter","Qua","Qui","Sex","Sab"];
+const DAY_FULL={"Seg":"Segunda-feira","Ter":"Terça-feira","Qua":"Quarta-feira","Qui":"Quinta-feira","Sex":"Sexta-feira","Sab":"Sábado"};
 const CLS=[
   {id:1,day:"Seg",time:"07:00",type:"Slim",cap:6,stu:[{n:"Ana Paula",s:"active",c:"Slim 3x"},{n:"Mariana Torres",s:"active",c:"Flex 5x"},{n:"Thiago Souza",s:"active",c:"Slim 3x"},{n:"Carlos Eduardo",s:"suspended",c:"Slim 2x"},{n:"Juliana Oliveira",s:"active",c:"Slim 4x"}]},
   {id:2,day:"Seg",time:"08:10",type:"Circuito",cap:6,stu:[{n:"Ana Paula",s:"active",c:"Flex 5x"},{n:"Thiago Souza",s:"active",c:"Circ 2x"},{n:"Roberto",s:"active",c:"Circ 3x"},{n:"Camila Rocha",s:"active",c:"Circ 2x"}]},
@@ -66,7 +67,7 @@ const HomePage=({onOpen,isMob})=>{
       </div>}
     </div>}
 
-    <div style={{fontSize:14,fontWeight:700,marginBottom:8}}>Hoje - {today}feira ({todayCls.length} aulas)</div>
+    <div style={{fontSize:14,fontWeight:700,marginBottom:8}}>Hoje - {DAY_FULL[today]} ({todayCls.length} aulas)</div>
     {todayCls.map(c=> <ClassCard key={c.id} c={c} onClick={()=>onOpen(c)} compact={isMob}/>)}
 
     <div style={{fontSize:14,fontWeight:700,margin:"16px 0 8px"}}>Resumo da Semana</div>
@@ -106,7 +107,7 @@ const GradePage=({onOpen,isMob})=>{
     </div>
 
     {view==="list"&&Object.entries(grouped).map(([day,classes])=> <div key={day} style={{marginBottom:12}}>
-      <div style={{fontSize:13,fontWeight:700,color:T.fg,marginBottom:6,display:"flex",alignItems:"center",gap:6}}><div style={{width:6,height:6,borderRadius:3,background:T.primary}}/>{day}feira <span style={{fontSize:11,color:T.mutedFg,fontWeight:500}}>({classes.length})</span></div>
+      <div style={{fontSize:13,fontWeight:700,color:T.fg,marginBottom:6,display:"flex",alignItems:"center",gap:6}}><div style={{width:6,height:6,borderRadius:3,background:T.primary}}/>{DAY_FULL[day]} <span style={{fontSize:11,color:T.mutedFg,fontWeight:500}}>({classes.length})</span></div>
       {classes.map(c=> <ClassCard key={c.id} c={c} onClick={()=>onOpen(c)} compact={isMob}/>)}
     </div>)}
 
@@ -146,7 +147,7 @@ const ClassDetail=({cls,onBack,checkins,doCheckin,isMob})=>{
     <div style={{background:`linear-gradient(135deg, ${tc[cls.type]}, ${tc[cls.type]}cc)`,padding:isMob?"16px 16px 24px":"20px 28px 28px",color:"#fff"}}>
       <button onClick={onBack} style={{background:"rgba(255,255,255,0.2)",border:"none",borderRadius:8,padding:"6px 14px",color:"#fff",fontSize:12,fontWeight:600,cursor:"pointer",fontFamily:"inherit",marginBottom:10}}>&#8592; Voltar</button>
       <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-end"}}>
-        <div><div style={{fontSize:isMob?22:28,fontWeight:800}}>{cls.type}</div><div style={{fontSize:14,opacity:0.9,marginTop:2}}>{cls.day}feira - {cls.time} - 50 min - Asa Sul</div></div>
+        <div><div style={{fontSize:isMob?22:28,fontWeight:800}}>{cls.type}</div><div style={{fontSize:14,opacity:0.9,marginTop:2}}>{DAY_FULL[cls.day]} - {cls.time} - 50 min - Asa Sul</div></div>
         <span style={{padding:"6px 12px",background:"rgba(255,255,255,0.2)",borderRadius:8,fontSize:13,fontWeight:600}}>{cls.stu.length}/{cls.cap}</span>
       </div>
     </div>
